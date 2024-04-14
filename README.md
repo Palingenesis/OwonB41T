@@ -13,8 +13,8 @@ There is a folder with instruction, if you just want to install the Application.
 </picture>
 
 # METER Name
-Keep the Meter Name as one of the following: BDM, B41T or B35T. Or the Name you give it needs adding to the source code and a fresh compile will be needed.
-[![Watch the video](https://img.youtube.com/vi/)](https://www.youtube.com/embed/https://www.youtube.com/watch?v=7G9IQ7iUrko&t=1s)
+Keep the Meter Name as one of the following: BDM, B41T or B35T. Or the Name you give it needs adding to the source code and a fresh compile will be needed.<br>
+[![Tim's OWON B35T+ (Part 2)]([https://img.youtube.com/vi/](https://www.youtube.com/embed/https://www.youtube.com/watch?v=7G9IQ7iUrko&t=1s))](https://www.youtube.com/embed/https://www.youtube.com/watch?v=7G9IQ7iUrko&t=1s)
 
 # Without the User Interface
 
