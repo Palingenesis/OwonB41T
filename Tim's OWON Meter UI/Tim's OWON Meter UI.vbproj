@@ -29,7 +29,7 @@
     <ProductName>OwonB41T User Interface</ProductName>
     <PublisherName>Tim</PublisherName>
     <SuiteName>OWON Insruments %28Tim%29</SuiteName>
-    <ApplicationRevision>25</ApplicationRevision>
+    <ApplicationRevision>28</ApplicationRevision>
     <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
     <UseApplicationTrust>false</UseApplicationTrust>
     <PublishWizardCompleted>true</PublishWizardCompleted>
@@ -169,9 +169,9 @@
     </None>
     <None Include="App.config" />
     <None Include="Tim%27s OWON Meter UI_TemporaryKey.pfx" />
-    <None Include="Tims_OWON_Meter.ttf">
+    <Content Include="Tims_OWON_Meter.ttf">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
+    </Content>
   </ItemGroup>
   <ItemGroup>
     <Content Include="Images\Display_Mask.png" />
