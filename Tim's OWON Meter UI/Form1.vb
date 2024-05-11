@@ -2,6 +2,7 @@
 Imports System.IO
 Imports System.Drawing.Text
 Imports System.Runtime.InteropServices
+Imports System.Threading.Tasks
 
 'A user Inteface to use the Output from OwonB41T.cpp by: Jeffrey Cash https://github.com/jtcash/OwonB41T
 '
@@ -126,8 +127,6 @@ Public Class Form1
         Label_Min.Font = Tims_OWON_Meter_15_75
         RichTextBox_Negative.Font = Tims_OWON_Meter_100
         RichTextBox_MeterValue.Font = Tims_OWON_Meter_120
-
-
 
 
     End Sub
@@ -341,6 +340,27 @@ Public Class Form1
         End If
 
     End Sub
+
+    Public Async Function Start_Off_Line_RecordingAsync(command As String, interval As Integer, number As Integer) As Task
+
+        If OwonB41T_StreamWriter Is Nothing Then
+            RichTextBox_ErrorStream.AppendText("Shell not Running or not Connected." + Environment.NewLine)
+            Return
+        End If
+
+        If OwonB41T_StreamWriter.BaseStream.CanWrite Then
+
+            OwonB41T_StreamWriter.WriteLine(command)
+            OwonB41T_StreamWriter.WriteLine(interval)
+            OwonB41T_StreamWriter.WriteLine(number)
+
+            Await Task.Delay(1000)
+
+            Stop_Reading()
+
+        End If
+
+    End Function
 
     Private Sub Button_UI_Click(sender As Object, e As EventArgs) Handles Button_UI.Click
 

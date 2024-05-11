@@ -28,6 +28,12 @@ Public Class Form_Plot
 
         Chart_Plot.ChartAreas(0).Axes(0).LabelStyle.Font = Form1.Tims_OWON_Meter_12
 
+        Button_SaveToFile.Font = Form1.Tims_OWON_Meter_15_75
+        Button_ZeroCursor.Font = Form1.Tims_OWON_Meter_12
+        Button_StartOffLineRecording.Font = Form1.Tims_OWON_Meter_12
+        Button_SaveOffLineRecording.Font = Form1.Tims_OWON_Meter_12
+        Button_LoadCSV.Font = Form1.Tims_OWON_Meter_12
+
     End Sub
     Private Sub Form_Plot_FormClosing(sender As Object, e As FormClosingEventArgs) Handles Me.FormClosing
         My.Settings.Save()
@@ -81,6 +87,17 @@ Public Class Form_Plot
         End If
 
     End Sub
+    'Private Sub Plot_Values()
+
+    '    Chart_Plot.Series("Series_Plot").Points.Clear()
+    '    For index = 0 To Database_Count - 1
+
+    '        Chart_Plot.Series("Series_Plot").Points.AddXY(index, Database(index))
+
+    '    Next
+
+    'End Sub
+
     Private Sub Plot_Values()
 
         Chart_Plot.Series("Series_Plot").Points.Clear()
@@ -91,6 +108,8 @@ Public Class Form_Plot
         Next
 
     End Sub
+
+
     'ABSALUTE VALUE
     Private Function True_UnitValue(dataType As String, recivedValue As Single)
 
@@ -335,6 +354,7 @@ Public Class Form_Plot
         End If
 
     End Sub
+
     'File
     Private Sub Button_SaveToFile_Click(sender As Object, e As EventArgs) Handles Button_SaveToFile.Click
 
@@ -352,18 +372,20 @@ Public Class Form_Plot
 
             For Each _value In Database
 
-                file.Write(_value)
+                ' Write "Unknown" for the date, the value, and "?" for the suffix, separated by commas
+                file.Write("Unknown," & _value & ",?")
                 _count += 1
                 If _count >= Database.Length Then Exit For
-                file.Write(",")
+                file.Write(vbCrLf)
 
             Next
-            file.Write(vbCrLf)
             file.Close()
 
         End If
 
     End Sub
+
+
     'RADIO BUTTONS
     Private Sub Set_RadioButtons()
 
@@ -389,11 +411,12 @@ Public Class Form_Plot
     'BUTTONS
     Private Sub Button_Hold_Click(sender As Object, e As EventArgs) Handles Button_Hold.Click
         If Button_Hold.Focused Then
-            Form1.Hold()
             Hold()
         End If
     End Sub
     Public Sub Hold()
+
+        Form1.Hold()
 
         ReadPlot = Not ReadPlot
 
@@ -452,14 +475,17 @@ Public Class Form_Plot
         Dim _count As Integer = 0
 
         For Each _value In Form1.Off_Line_Data
+            '   Item 0 = Hash = "#"
+            '   Item 1 = Date and Time = "2024-05-11 11:19:57"
+            '   Item 2 = value = "20.76"
+            '   Item 3 = Suffix Type Carrage-return andd Line-feed = "k Ohm" & vbCrLf
 
-            file.Write(_value(2))
+            ' Write the date, value, and suffix to the file, separated by commas
+            file.Write(_value(1) & "," & _value(2) & "," & _value(3).Replace(vbCrLf, ""))
             _count += 1
             If _count >= Database.Length - 1 Then Exit For
-            file.Write(",")
-
+            file.Write(vbCrLf)
         Next
-        file.Write(vbCrLf)
         file.Close()
 
     End Sub
@@ -471,18 +497,18 @@ Public Class Form_Plot
 
         If Form1.Shell_Open = True Then
 
-            Form1.SendCommand("p " + NumericUpDown_RecordInterval.Value.ToString() + " " + NumericUpDown_RecordNumberOfReading.Value.ToString())
-            Form1.Stop_Reading()
+            Dim unused = Form1.Start_Off_Line_RecordingAsync("p", NumericUpDown_RecordInterval.Value, NumericUpDown_RecordNumberOfReading.Value)
+
+            'Form1.SendCommand("p " + NumericUpDown_RecordInterval.Value.ToString() + " " + NumericUpDown_RecordNumberOfReading.Value.ToString())
+            'Form1.Stop_Reading()
         Else
 
             MessageBox.Show("Warning: The Digital Multimeter is not connected.", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Warning)
         End If
     End Sub
+
     'LOAD CSV FILE
     Private Sub Button_LoadCSV_Click(sender As Object, e As EventArgs) Handles Button_LoadCSV.Click
-
-        Dim data As Decimal()()
-        Database_Length = 0
 
         OpenFileDialog1.Filter = "Tim's Comma-Separated Values|*.CSV|Text|*.txt|All|*.*"
         OpenFileDialog1.Title = "Select a CSV File"
@@ -491,28 +517,23 @@ Public Class Form_Plot
         If OpenFileDialog1.ShowDialog() = DialogResult.OK Then
             Dim filePath As String = OpenFileDialog1.FileName
             Dim lines As String() = File.ReadAllLines(filePath)
-            data = New Decimal(lines.Length - 1)() {}
+            Database = New Decimal(lines.Length - 1) {}
             For i As Integer = 0 To lines.Length - 1
                 Dim line As String = lines(i).TrimEnd(","c)
                 Dim fields As String() = line.Split(","c)
-                data(i) = Array.ConvertAll(fields, Function(str) Decimal.Parse(str))
+                ' Store the value (which is in the second position, index 1) in the Database array
+                Database(i) = Decimal.Parse(fields(1))
             Next
-            ' data now contains an array of Decimal arrays, where each element of the outer array represents a line from the file
+            ' Database now contains an array of Decimals, where each element represents a value from the file
 
-
-            Database = data(0)
             Database_Length = Database.Length
             Database_Count = Database.Length
             NumericUpDown_PlotPoints.Value = Database_Length
-
 
             Plot_Values()
         End If
 
     End Sub
-
-
-
 
 
 

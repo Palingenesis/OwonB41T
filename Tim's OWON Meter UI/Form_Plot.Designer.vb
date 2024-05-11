@@ -65,6 +65,7 @@ Partial Class Form_Plot
         Me.Label5 = New System.Windows.Forms.Label()
         Me.NumericUpDown_RecordInterval = New System.Windows.Forms.NumericUpDown()
         Me.OpenFileDialog1 = New System.Windows.Forms.OpenFileDialog()
+        Me.ToolTip1 = New System.Windows.Forms.ToolTip(Me.components)
         CType(Me.Chart_Plot, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.GroupBox_Range.SuspendLayout()
         CType(Me.NumericUpDown_PlotPoints, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -477,7 +478,9 @@ Partial Class Form_Plot
         Me.Button_LoadCSV.Name = "Button_LoadCSV"
         Me.Button_LoadCSV.Size = New System.Drawing.Size(170, 36)
         Me.Button_LoadCSV.TabIndex = 58
-        Me.Button_LoadCSV.Text = "Load TCSV"
+        Me.Button_LoadCSV.Text = "Load CSV"
+        Me.ToolTip1.SetToolTip(Me.Button_LoadCSV, "Please Note!" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "The Commer Seperated file" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "should have the following format:" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "Date," &
+        " Value, Suffix ")
         Me.Button_LoadCSV.UseVisualStyleBackColor = False
         '
         'GroupBox_RetrieveOffLineData
@@ -497,7 +500,7 @@ Partial Class Form_Plot
         Me.Button_SaveOffLineRecording.FlatAppearance.BorderSize = 2
         Me.Button_SaveOffLineRecording.FlatAppearance.MouseDownBackColor = System.Drawing.Color.FromArgb(CType(CType(0, Byte), Integer), CType(CType(192, Byte), Integer), CType(CType(0, Byte), Integer))
         Me.Button_SaveOffLineRecording.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Yellow
-        Me.Button_SaveOffLineRecording.Font = New System.Drawing.Font("Tims_OWON_Meter", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Button_SaveOffLineRecording.Font = New System.Drawing.Font("Tims_OWON_Meter", 12.0!)
         Me.Button_SaveOffLineRecording.ForeColor = System.Drawing.Color.Silver
         Me.Button_SaveOffLineRecording.Location = New System.Drawing.Point(3, 15)
         Me.Button_SaveOffLineRecording.Name = "Button_SaveOffLineRecording"
@@ -666,4 +669,5 @@ Partial Class Form_Plot
     Friend WithEvents Button_SaveOffLineRecording As Button
     Friend WithEvents Button_LoadCSV As Button
     Friend WithEvents OpenFileDialog1 As OpenFileDialog
+    Friend WithEvents ToolTip1 As ToolTip
 End Class
