@@ -50,3 +50,4 @@ E:\Users\timon\Documents\Visual Studio Projects\_Repositorys\OwonB41T\Tim's OWON
 E:\Users\timon\Documents\Visual Studio Projects\_Repositorys\OwonB41T\Tim's OWON Meter UI\obj\Release\Tim's OWON Meter UI.exe
 E:\Users\timon\Documents\Visual Studio Projects\_Repositorys\OwonB41T\Tim's OWON Meter UI\obj\Release\Tim's OWON Meter UI.xml
 E:\Users\timon\Documents\Visual Studio Projects\_Repositorys\OwonB41T\Tim's OWON Meter UI\obj\Release\Tim's OWON Meter UI.pdb
+E:\Users\timon\Documents\Visual Studio Projects\_Repositorys\OwonB41T\Tim's OWON Meter UI\obj\Release\Tim_s_OWON_Meter_UI.Form_LogALL.resources
