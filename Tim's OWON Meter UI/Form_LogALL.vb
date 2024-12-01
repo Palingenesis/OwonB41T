@@ -1,5 +1,6 @@
 ﻿
 Imports System.IO
+Imports System.Globalization
 
 Public Class Form_LogALL
 
@@ -53,8 +54,10 @@ Public Class Form_LogALL
 			' Append the output to a text file (each output on a new line)
 			Dim _newLine As String = recived_OwonB41T_Output.TrimEnd(vbCr, vbLf)
 
+
 			' Add a tab character and the current date and time
-			_newLine = $"{_newLine}{vbTab}{DateTime.Now:yyyy-MM-dd}" & vbTab & $"{DateTime.Now:HH:mm:ss.fff}"
+			_newLine = $"{_newLine}{vbTab}{DateTime.Now.ToString("yyyy-MM-dd", Form1.culture)}" & vbTab & $"{DateTime.Now.ToString("HH:mm:ss.fff", Form1.culture)}"
+			'_newLine = $"{_newLine}{vbTab}{DateTime.Now:yyyy-MM-dd}" & vbTab & $"{DateTime.Now:HH:mm:ss.fff}"
 
 			Using writer As New StreamWriter(File_Name, True) ' 'True' appends to the file
 				writer.WriteLine(_newLine)

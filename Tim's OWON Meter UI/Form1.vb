@@ -4,6 +4,7 @@ Imports System.Drawing.Text
 Imports System.Runtime.InteropServices
 Imports System.Threading.Tasks
 Imports System.Reflection
+Imports System.Globalization
 
 'A user Inteface to use the Output from OwonB41T.cpp by: Jeffrey Cash https://github.com/jtcash/OwonB41T
 '
@@ -61,6 +62,8 @@ Imports System.Reflection
 #End Region
 
 Public Class Form1
+
+	Public culture As CultureInfo = New CultureInfo("en-GB")
 
 	Private MyApplicationVersion As String
 	Private OwonB41T_Shell_Process As Process = Nothing
