@@ -5,6 +5,8 @@ Imports System.Runtime.InteropServices
 Imports System.Threading.Tasks
 Imports System.Reflection
 Imports System.Globalization
+Imports System.Threading
+
 
 'A user Inteface to use the Output from OwonB41T.cpp by: Jeffrey Cash https://github.com/jtcash/OwonB41T
 '
@@ -99,6 +101,9 @@ Public Class Form1
 	'FORM
 	Private Sub Form1_Load(sender As Object, e As EventArgs) Handles MyBase.Load
 
+		' Set the culture to English (United Kingdom)
+		Thread.CurrentThread.CurrentCulture = New CultureInfo("en-GB")
+		Thread.CurrentThread.CurrentUICulture = New CultureInfo("en-GB")
 		Set_Tims_OWON_Meter_Font()
 
 		Icon = My.Resources.Meter
